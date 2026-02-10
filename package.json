@@ -8,14 +8,17 @@
     "require": "./dist/cjs/index.js",
     "import": "./dist/esm/index.js"
   },
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
     "@babel/plugin-transform-modules-commonjs": "^7.28.6",
     "@types/node": "^25.2.1",
-    "esbuild": "^0.25.12",
+    "esbuild": "^0.27.3",
     "tsd": "^0.33.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.0.8"
   },
   "scripts": {
@@ -34,5 +37,5 @@
     "email": "@gmail.com"
   },
   "homepage": "https://github.com/",
-  "keywords": [ ]
+  "keywords": []
 }

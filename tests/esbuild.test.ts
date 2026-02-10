@@ -1,5 +1,5 @@
 import {describe, afterAll} from "vitest"
-import {rmSync, mkdirSync, rmdirSync} from "node:fs"
+import {rmSync, mkdirSync } from "node:fs"
 import {build, type BuildOptions} from "esbuild"
 import {createRequire} from "node:module"
 var require = createRequire(import.meta.url)
@@ -26,9 +26,9 @@ var buildOptions: BuildOptions = {
   ignoreAnnotations: false,
   resolveExtensions: [".mts", ".ts", ".js", ".mjs", ".cts", ".cjs"],
 }
-mkdirSync("tmp")
-var mjsFile = "tmp/esm.mjs"
-var cjsFile = "tmp/cjs.cjs"
+try { mkdirSync("tmp") } catch {}
+var mjsFile = "../tmp/esm.mjs"
+var cjsFile = "../tmp/cjs.cjs"
 await Promise.all([
   build({
     ...buildOptions,
@@ -48,7 +48,7 @@ var cjs: typeof import("mylib") = require(mjsFile)
 afterAll(()=>{
   rmSync(mjsFile)
   rmSync(cjsFile)
-  rmdirSync("tmp")
+  rmSync("tmp", {recursive: true, force: true})
 })
 describe("ESM", ()=>runTests(esm))
 describe("CJS", ()=>runTests(cjs))
