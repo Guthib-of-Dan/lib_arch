@@ -26,6 +26,7 @@
     "build:cjs": "babel dist/esm --out-dir dist/cjs",
     "build:types": "tsc -p tsconfig.types.json",
     "build": "npm run build:types && npm run build:esm && npm run build:cjs",
+    "trick-tsd": "bun link && bun link mylib",
     "test": "tsd && vitest run"
   },
   "repository": {

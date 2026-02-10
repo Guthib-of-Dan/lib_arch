@@ -21,7 +21,7 @@ jobs:
       - name: install deps
         run: bun install
       - name: build
-        run: bun run build
+        run: bun run trick-tsd && bun run build
       - name: test
         run: bun run test
       - name: Publish to npm

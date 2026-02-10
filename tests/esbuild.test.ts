@@ -1,5 +1,7 @@
 import {describe, afterAll} from "vitest"
-import {rmSync, mkdirSync } from "node:fs"
+import {rmSync, mkdirSync} from "node:fs"
+import {cwd} from "node:process"
+import {resolve} from "node:path"
 import {build, type BuildOptions} from "esbuild"
 import {createRequire} from "node:module"
 var require = createRequire(import.meta.url)
@@ -26,9 +28,9 @@ var buildOptions: BuildOptions = {
   ignoreAnnotations: false,
   resolveExtensions: [".mts", ".ts", ".js", ".mjs", ".cts", ".cjs"],
 }
-try { mkdirSync("tmp") } catch {}
-var mjsFile = "../tmp/esm.mjs"
-var cjsFile = "../tmp/cjs.cjs"
+try { mkdirSync(resolve(cwd(), "tmp")) } catch {}
+var mjsFile = resolve(cwd(), "tmp/esm.mjs")
+var cjsFile = resolve("tmp/cjs.cjs")
 await Promise.all([
   build({
     ...buildOptions,
