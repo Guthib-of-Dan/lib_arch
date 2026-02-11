@@ -1,8 +1,7 @@
 # Basic architecture for creating typescript libraries 
 ## Source
 You can write .ts (and index.ts as main) files in "src", build them with "bun run build".  
-The support is for ESM and CJS.  
-Don't delete the "dist" directory. it must contain esm/package.json with '"type": "module"'
+The support is for ESM and CJS. But to build cjs, you havr to build esm first.
 ## Testing
 ### Built source
 You can write all tests in "tests/all.ts" or make it import other tests. Tests can be either usign "vitest" or "tsd" in the same file. Bear in mind, that exported (as default export) function runs 4 times (ESM, CJS, and look below). If you want to import your package with the name you used in package.json then you have to trick tsd. Literally. Just run "bun run trick-tsd" and you are good to go.
