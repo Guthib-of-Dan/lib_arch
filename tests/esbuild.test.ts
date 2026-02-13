@@ -28,9 +28,10 @@ var buildOptions: BuildOptions = {
   ignoreAnnotations: false,
   resolveExtensions: [".mts", ".ts", ".js", ".mjs", ".cts", ".cjs"],
 }
-try { mkdirSync(resolve(cwd(), "tmp")) } catch {}
-var mjsFile = resolve(cwd(), "tmp/esm.mjs")
-var cjsFile = resolve("tmp/cjs.cjs")
+var tmpDir = resolve(cwd(), "tmp");
+try { mkdirSync(tmpDir) } catch {}
+var mjsFile = resolve(tmpDir, "esm.mjs")
+var cjsFile = resolve(tmpDir, "cjs.cjs")
 await Promise.all([
   build({
     ...buildOptions,
@@ -48,9 +49,7 @@ await Promise.all([
 var esm: typeof import("mylib") = await import(mjsFile)
 var cjs: typeof import("mylib") = require(mjsFile)
 afterAll(()=>{
-  rmSync(mjsFile)
-  rmSync(cjsFile)
-  rmSync("tmp", {recursive: true, force: true})
+  rmSync(tmpDir, {recursive: true, force: true})
 })
 describe("ESM", ()=>runTests(esm))
 describe("CJS", ()=>runTests(cjs))
