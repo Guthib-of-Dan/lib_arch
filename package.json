@@ -1,12 +1,30 @@
 {
   "name": "mylib",
-  "tsd": { "directory": "tests" },
+  "files": [
+    "dist"
+  ],
+  "tsd": {
+    "directory": "tests"
+  },
+  "typesVersions": {
+    "*": {
+      ".": ["./dist/types/index.d.ts"],
+      "sub": ["./dist/types/sub.d.ts"]
+    }
+  },
   "version": "0.0.0",
   "types": "./dist/types/index.d.ts",
   "exports": {
-    "types": "./dist/types/index.d.ts",
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/esm/index.js"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    },
+    "./sub": {
+      "types": "./dist/types/sub.d.ts",
+      "require": "./dist/cjs/sub.js",
+      "import": "./dist/esm/sub.js"
+    }
   },
   "publishConfig": {
     "access": "public"
@@ -22,6 +40,7 @@
     "vitest": "^4.0.8"
   },
   "scripts": {
+    "pack": "npm pack",
     "build:esm": "tsc -p tsconfig.esm.json && echo '{\"type\": \"module\"}' > dist/esm/package.json",
     "build:cjs": "babel dist/esm --out-dir dist/cjs",
     "build:types": "tsc -p tsconfig.types.json",
