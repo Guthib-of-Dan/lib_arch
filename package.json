@@ -46,7 +46,7 @@
     "build:types": "tsc -p tsconfig.types.json",
     "build": "npm run build:types && npm run build:esm && npm run build:cjs",
     "trick-tsd": "bun link && bun link mylib",
-    "test": "tsd && vitest run"
+    "test": "tsd && vitest run tests/index.test.ts"
   },
   "repository": {
     "type": "git",
