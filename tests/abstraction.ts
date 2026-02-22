@@ -55,26 +55,26 @@ export default async function(externalLibraries: string[], testedModules: Module
     })
   ])
   describe("CJS", ()=>{
-    describe("NORMAL", ()=>{
+    describe("NORMAL", async ()=>{
       for (var module of testedModules) {
-        tests[module.test](module.normalCJS)
+        await tests[module.test](module.normalCJS)
       }
     })
-    describe("MINIFIED", ()=>{
+    describe("MINIFIED", async ()=>{
       for (var module of testedModules) {
-        tests[module.test](require(resolve(tmpDir, "cjs", module.name)))
+        await tests[module.test](require(resolve(tmpDir, "cjs", module.name)))
       }
     })
   })
   describe("ESM", ()=>{
-    describe("NORMAL", ()=>{
+    describe("NORMAL", async ()=>{
       for (var module of testedModules) {
-        tests[module.test](module.normalESM)
+        await tests[module.test](module.normalESM)
       }
     })
     describe("MINIFIED", async () => {
       for (var module of testedModules) {
-        tests[module.test](await import(resolve(tmpDir, "esm", module.name)))
+        await tests[module.test](await import(resolve(tmpDir, "esm", module.name)))
       }
     })
   })
