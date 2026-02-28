@@ -1,8 +1,6 @@
 import runTests from "./abstraction"
 import {createRequire} from "node:module"
 var require = createRequire(import.meta.url);
-
-
 await runTests(/*External dependencies not to be bundled with esbuild*/ ["uWebSockets.js"], [
   {
     // test "exports" field in package.json when running vitest
